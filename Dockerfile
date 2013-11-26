@@ -23,8 +23,8 @@ RUN useradd warrior
 RUN echo "warrior ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN mkdir /home/warrior && chown warrior: /home/warrior
 
-RUN (cd /home/warrior && sudo -u warrior git clone https://github.com/FiloSottile/warrior-code2.git)
+RUN (cd /home/warrior && sudo -u warrior git clone https://github.com/ArchiveTeam/warrior-code2.git)
 # RUN (cd /home/warrior/warrior-code2 && sudo -u warrior DOCKER=1 ./boot.sh)
 
-# EXPOSE 8001  # Enabling this will redirect a port on the host to the web interface. Not recommended. Use a SSH tunnel or a VPN.
+EXPOSE 8001
 CMD ["/bin/bash", "-c", "(cd /home/warrior/warrior-code2 && sudo -u warrior DOCKER=1 ./boot.sh && sudo -u warrior DOCKER=1 ./warrior-runner.sh)"]
