@@ -5,4 +5,11 @@
 
 Build, run, grab the container IP and access the web interface on port 8001.
 
+Available as a Trusted Build on the index as [`filosottile/archiveteam-warrior`](https://index.docker.io/u/filosottile/archiveteam-warrior/) so you can just
+
+```
+docker pull filosottile/archiveteam-warrior
+docker run filosottile/archiveteam-warrior
+```
+
 **TODO**: use `supervisord`, make `cron` work and consider pre-installing the whole Warrior on build (or maybe not).
