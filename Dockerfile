@@ -23,7 +23,7 @@ RUN useradd warrior
 RUN echo "warrior ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN mkdir /home/warrior && chown warrior: /home/warrior
 
-RUN (cd /home/warrior && sudo -u warrior git clone https://github.com/ArchiveTeam/warrior-code2.git)
+RUN (cd /home/warrior && sudo -u warrior git clone -b docker https://github.com/ArchiveTeam/warrior-code2.git)
 # RUN (cd /home/warrior/warrior-code2 && sudo -u warrior DOCKER=1 ./boot.sh)
 
 EXPOSE 8001
