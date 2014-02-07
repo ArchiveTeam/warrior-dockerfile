@@ -11,5 +11,3 @@ Available as a Trusted Build on the index as [`archiveteam/warrior-dockerfile`](
 docker pull archiveteam/warrior-dockerfile
 docker run archiveteam/warrior-dockerfile
 ```
-
-**TODO**: use `supervisord`, make `cron` work and consider pre-installing the whole Warrior on build (or maybe not).
