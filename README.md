@@ -9,5 +9,11 @@ Available as a Trusted Build on the index as [`archiveteam/warrior-dockerfile`](
 
 ```
 docker pull archiveteam/warrior-dockerfile
-docker run archiveteam/warrior-dockerfile
+# run without -d to follow the warrior install process
+# you will need to detach or stop-and-start the container
+docker run [-d] archiveteam/warrior-dockerfile
 ```
+
+To access the web interface get the conatiner IP from `docker inspect` and point your browser to `http://IP:8001`
+
+You can stop and resume the Warrior with `docker stop` and `docker start`
