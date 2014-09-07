@@ -14,6 +14,9 @@ RUN apt-get install -y python-pip git pciutils sudo net-tools isc-dhcp-client py
 RUN apt-add-repository -y ppa:archiveteam/wget-lua && apt-get update
 RUN apt-get install -y wget-lua
 
+# Fix dnsmasq bug (see https://github.com/nicolasff/docker-cassandra/issues/8#issuecomment-36922132)
+RUN echo 'user=root' >> /etc/dnsmasq.conf
+
 # Setup system for the warrior
 RUN useradd warrior
 RUN echo "warrior ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
