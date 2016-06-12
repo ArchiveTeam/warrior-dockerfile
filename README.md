@@ -14,6 +14,6 @@ docker pull archiveteam/warrior-dockerfile
 docker run [-d] archiveteam/warrior-dockerfile
 ```
 
-To access the web interface get the conatiner IP from `docker inspect` and point your browser to `http://IP:8001`
+To access the web interface get the container IP from `docker inspect` and point your browser to `http://IP:8001`
 
 You can stop and resume the Warrior with `docker stop` and `docker start`
