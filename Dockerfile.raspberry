@@ -10,11 +10,11 @@ ENV HOME /root
 CMD ["/sbin/my_init"]
 
 # Install dependencies
-RUN apt-add-repository universe && apt-get update
-RUN apt-get install -y python-pip git pciutils sudo net-tools isc-dhcp-client python-software-properties wget
+RUN apt-get update
+RUN apt-get install -y python-pip git sudo net-tools isc-dhcp-client python-software-properties wget liblua5.1-0 python-dev
 
 # Add wget-lua binary compiled for ARM
-ADD wget-lua.raspberry /usr/local/bin/wget-lua
+ADD wget-lua.raspberry /usr/bin/wget-lua
 
 # Fix dnsmasq bug (see https://github.com/nicolasff/docker-cassandra/issues/8#issuecomment-36922132)
 RUN echo 'user=root' >> /etc/dnsmasq.conf
