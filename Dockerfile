@@ -8,9 +8,9 @@ ENV HOME /root
 CMD ["/sbin/my_init"]
 
 # Install dependencies
-RUN apt-add-repository -y ppa:archiveteam/wget-lua
 RUN apt-get update
-RUN apt-get install -y python python-pip git pciutils sudo net-tools isc-dhcp-client python-software-properties wget wget-lua
+RUN apt-get install -y python python-pip git pciutils sudo net-tools isc-dhcp-client python-software-properties wget
+RUN ./get-wget-lua.sh
 
 # Fix dnsmasq bug (see https://github.com/nicolasff/docker-cassandra/issues/8#issuecomment-36922132)
 RUN echo 'user=root' >> /etc/dnsmasq.conf
