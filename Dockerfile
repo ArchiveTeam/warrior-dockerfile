@@ -1,5 +1,5 @@
 # Use phusion/baseimage as base image.
-FROM phusion/baseimage:0.9.5
+FROM phusion/baseimage:0.9.20
 
 MAINTAINER Filippo Valsorda <fv@filippo.io>
 
@@ -10,9 +10,9 @@ ENV HOME /root
 CMD ["/sbin/my_init"]
 
 # Install dependencies
-RUN apt-get install -y python-pip git pciutils sudo net-tools isc-dhcp-client python-software-properties wget
-RUN apt-add-repository -y ppa:archiveteam/wget-lua && apt-get update
-RUN apt-get install -y wget-lua
+RUN apt-add-repository -y ppa:archiveteam/wget-lua
+RUN apt-get update
+RUN apt-get install -y python python-pip git pciutils sudo net-tools isc-dhcp-client python-software-properties wget wget-lua
 
 # Fix dnsmasq bug (see https://github.com/nicolasff/docker-cassandra/issues/8#issuecomment-36922132)
 RUN echo 'user=root' >> /etc/dnsmasq.conf
