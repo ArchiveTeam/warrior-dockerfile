@@ -1,8 +1,6 @@
 # Use phusion/baseimage as base image.
 FROM phusion/baseimage:0.9.20
 
-MAINTAINER Filippo Valsorda <fv@filippo.io>
-
 # Set environment variables.
 ENV HOME /root
 
