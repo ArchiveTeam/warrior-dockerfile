@@ -10,10 +10,12 @@ Available as a Trusted Build on the index as [`archiveteam/warrior-dockerfile`](
 ```
 docker pull archiveteam/warrior-dockerfile
 # run without -d to follow the warrior install process
-# you will need to detach or stop-and-start the container
-docker run [-d] archiveteam/warrior-dockerfile
+# you will need to detach or stop-and-start the container.
+# use -p to bind port 8001 on the docker container 
+# (default ip 172.17.0.x) to port 8001 on localhost.
+docker run [-d] [-p 8001:8001] archiveteam/warrior-dockerfile
 ```
 
-To access the web interface get the container IP from `docker inspect` and point your browser to `http://IP:8001`
+To access the web interface get the container IP from `docker inspect` and point your browser to `http://IP:8001`. If you are running this container on a headless machine, be sure to bind the docker container's port to a port on that machine (e.g. `-p 8001:8001`) so that you can access the web interface on your LAN.
 
 You can stop and resume the Warrior with `docker stop` and `docker start`
