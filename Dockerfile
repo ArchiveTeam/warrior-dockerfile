@@ -12,6 +12,7 @@ RUN apt-get update
 RUN apt-get install -y python python-pip git pciutils sudo net-tools isc-dhcp-client python-software-properties wget libgnutls-dev liblua5.1-0-dev autoconf flex
 ADD get-wget-lua.sh /
 RUN chmod +x /get-wget-lua.sh && bash -c "/get-wget-lua.sh"
+RUN apt-get remove -y libgnutls-dev liblua5.1-0-dev autoconf flex && apt-get autoremove -y
 
 # Fix dnsmasq bug (see https://github.com/nicolasff/docker-cassandra/issues/8#issuecomment-36922132)
 RUN echo 'user=root' >> /etc/dnsmasq.conf
