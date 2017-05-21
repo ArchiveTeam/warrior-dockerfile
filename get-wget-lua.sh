@@ -18,7 +18,7 @@ then
   fi
 fi
 
-WGET_DOWNLOAD_URL="http://warriorhq.archiveteam.org/downloads/wget-lua/wget-1.14.lua.LATEST.tar.bz2"
+WGET_DOWNLOAD_URL="https://warriorhq.archiveteam.org/downloads/wget-lua/wget-1.14.lua.LATEST.tar.bz2"
 
 rm -rf get-wget-lua.tmp/
 mkdir -p get-wget-lua.tmp
