@@ -48,6 +48,7 @@ then
   echo
   ./wget-lua --help | grep -iE "gnu|warc|lua"
   rm -rf get-wget-lua.tmp
+  mv wget-lua /usr/bin/wget-lua
   exit 0
 else
   echo
