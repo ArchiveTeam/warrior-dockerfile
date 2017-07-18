@@ -1,5 +1,5 @@
 # Use phusion/baseimage as base image.
-FROM phusion/baseimage:0.9.20
+FROM phusion/baseimage:0.9.22
 
 # Set environment variables.
 ENV HOME /root
