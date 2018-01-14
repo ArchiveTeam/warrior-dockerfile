@@ -14,8 +14,11 @@ docker pull archiveteam/warrior-dockerfile
 # use -p to bind port 8001 on the docker container 
 # (default ip 172.17.0.x) to port 8001 on localhost.
 docker run [-d] [-p 8001:8001] archiveteam/warrior-dockerfile
+```
 
-# Restart on reboot automatically by just running:
+If you prefer to just run the process in the background, and automatically start it again after machine reboot, use this instead:
+
+``` shell-interaction
 docker run --detach \
   --publish 8001:8001 \
   --restart always \
