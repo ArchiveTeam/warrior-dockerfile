@@ -15,6 +15,15 @@ docker pull archiveteam/warrior-dockerfile
 docker run [-d] [-p 8001:8001] archiveteam/warrior-dockerfile
 ```
 
+If you prefer to just run the process in the background, and automatically start it again after machine reboot, use this instead:
+
+``` shell-interaction
+docker run --detach \
+  --publish 8001:8001 \
+  --restart always \
+  archiveteam/warrior-dockerfile
+```
+
 To access the web interface get the container IP from `docker inspect` and point your browser to `http://IP:8001`. If you are running this container on a headless machine, be sure to bind the docker container's port to a port on that machine (e.g. `-p 8001:8001`) so that you can access the web interface on your LAN.
 
 You can stop and resume the Warrior with `docker stop` and `docker start`
