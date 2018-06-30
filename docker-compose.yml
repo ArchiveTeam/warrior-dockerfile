@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  Watchtower:
+    image: v2tec/watchtower:latest
+    command: --cleanup --label-enable --schedule="0 2 * * *"
+    container_name: Watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  archiveTeamWarrior:
+    image: archiveteam/warrior-dockerfile
+    container_name: archiveTeamWarrior
+    hostname: archiveTeamWarrior
+    ports:
+      - "8001:8001"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: always
+
