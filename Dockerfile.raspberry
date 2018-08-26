@@ -11,8 +11,7 @@ CMD ["/sbin/my_init"]
 
 # Install dependencies
 RUN apt-get update
-RUN apt-get install -y python-pip python3 python3-pip git sudo net-tools isc-dhcp-client python-software-properties wget liblua5.1-0 python-dev
-RUN apt-get clean && apt-get autoremove -y
+RUN apt-get install -y python-pip python3 python3-pip git pciutils sudo net-tools isc-dhcp-client python-software-properties wget liblua5.1-0 python-dev
 
 # Add wget-lua binary compiled for ARM
 ADD wget-lua.raspberry /usr/bin/wget-lua
@@ -40,4 +39,4 @@ RUN mkdir /etc/service/warrior
 ADD warrior.sh /etc/service/warrior/run
 
 # Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
