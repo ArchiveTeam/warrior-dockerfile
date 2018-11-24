@@ -13,13 +13,12 @@ RUN apt-get install -y --no-install-recommends \
 	liblua5.1-0 \
 	python \
 	python-pip \
-	python-requests \
 	python-setuptools \
 	python3 \
 	python3-pip \
-	python3-requests \
 	python3-setuptools \
 	sudo \
+	wget \
 	&& useradd -d /home/warrior -m -U warrior \
 	&& echo "warrior ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers \
 	&& mkdir -p /data/data \
@@ -61,11 +60,16 @@ RUN apt-get remove -y --purge \
 	&& apt-get clean -y \
 	&& apt-get autoremove -y --purge \
 	&& rm -r /var/lib/apt/lists/* \
-	&& rm -r /tmp
+	&& rm -r /tmp/*
 
-RUN pip3 install seesaw \
+RUN pip install requests \
+	&& pip install six \
 	&& pip install warc \
+	&& pip3 install requests \
+	&& pip3 install six \
 	&& pip3 install warc
+
+RUN pip3 install seesaw
 
 WORKDIR /home/warrior
 USER warrior
