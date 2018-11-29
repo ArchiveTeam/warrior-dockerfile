@@ -27,3 +27,30 @@ docker run --detach \
 To access the web interface get the container IP from `docker inspect` and point your browser to `http://IP:8001`. If you are running this container on a headless machine, be sure to bind the docker container's port to a port on that machine (e.g. `-p 8001:8001`) so that you can access the web interface on your LAN.
 
 You can stop and resume the Warrior with `docker stop` and `docker start`
+
+
+Raspberry Pi:
+You can build the container with the following command:
+``` shell-interaction
+docker build --rm -t warrior-arm32v5:latest -f Dockerfile.raspberry .
+```
+
+The image needs a place to store the downloaded data as well as its
+configuration.  Say you have a location suitable at /var/local/warrior
+use the command below, otherwise update the data and config.json paths.
+
+First, create an empty config.json if it doesn't exist.  Otherwise when you
+mount the path with docker it will create it as a directory.
+``` shell-interaction
+touch /var/local/warrior/config.json
+```
+
+Now start the container.
+``` shell-interaction
+docker run \
+	--volume /var/local/warrior/data:/data/data \
+	--volume /var/local/warrior/config.json:/home/warrior/projects/config.json \
+	--publish 8001:8001 \
+	--restart always \
+	warrior-arm32v5:latest
+```
