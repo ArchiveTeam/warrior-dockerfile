@@ -19,6 +19,7 @@ RUN apt-get install -y --no-install-recommends \
 	python3-setuptools \
 	sudo \
 	wget \
+	rsync \
 	&& useradd -d /home/warrior -m -U warrior \
 	&& echo "warrior ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers \
 	&& mkdir -p /data/data \
