@@ -26,6 +26,7 @@ RUN apt-get update \
       python-setuptools \
       python3 \
       python3-pip \
+      python-requests \
       python3-setuptools \
       rsync \
       software-properties-common \
