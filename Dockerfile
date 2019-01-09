@@ -70,4 +70,4 @@ ENV WARRIOR_ID=""
 ENV CONCURRENT_ITEMS=""
 
 # Add the boot script (this will install the actual warrior on boot)
-COPY boot.sh /etc/my_init.d/warrior-boot.sh
+COPY warrior-boot.sh /etc/my_init.d/
