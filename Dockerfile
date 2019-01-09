@@ -4,7 +4,10 @@ FROM phusion/baseimage:0.11
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
-ADD get-wget-lua.sh /
+# Expose web interface port
+EXPOSE 8001
+
+COPY get-wget-lua.sh /
 
 # Install dependencies
 RUN apt-get update \
@@ -40,35 +43,23 @@ RUN apt-get update \
     liblua5.1-0-dev \
     make \
   && apt-get clean && apt-get autoremove -y \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 # Setup system for the warrior
-RUN useradd warrior
-RUN mkdir /home/warrior && chown warrior: /home/warrior
-
+  && useradd warrior \
+  && mkdir /home/warrior \
+  && chown warrior: /home/warrior \
 # Clone warrior code
-USER warrior
-WORKDIR /home/warrior
-RUN git clone -b docker https://github.com/ArchiveTeam/warrior-code2.git
-USER root
-
-# Add the boot script (this will install the actual warrior on boot)
-RUN mkdir -p /etc/my_init.d
-ADD boot.sh /etc/my_init.d/warrior-boot.sh
-
+ && cd /home/warrior \
+ && sudo -u warrior git clone -b docker https://github.com/ArchiveTeam/warrior-code2.git \
 # running as root and/or requiring sudo is a bad practice in docker containers,
 # sadly sudo is hard-coded all over the place in `warrior-code2`
-RUN echo "warrior ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
-# Expose web interface port
-EXPOSE 8001
+ && echo "warrior ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # Add the warrior service entry for runit
-RUN mkdir /etc/service/warrior
-ADD warrior.sh /etc/service/warrior/run
+COPY warrior.sh /etc/service/warrior/run
 
 # ENV to JSON
-ADD env-to-json.sh /home/warrior
+COPY env-to-json.sh /home/warrior
 
 ENV DOWNLOADER=""
 ENV HTTP_PASSWORD=""
@@ -78,3 +69,5 @@ ENV SHARED_RSYNC_THREADS=""
 ENV WARRIOR_ID=""
 ENV CONCURRENT_ITEMS=""
 
+# Add the boot script (this will install the actual warrior on boot)
+COPY boot.sh /etc/my_init.d/warrior-boot.sh
