@@ -44,7 +44,7 @@ will be ignored. Please note: This is currently not available in the Raspberry P
 ```shell
   docker run \
       --detach \
-      --env DOWNLOADER="your name" -e \
+      --env DOWNLOADER="your name" \
       --env SELECTED_PROJECT="auto" \
       --publish 8001:8001 \
       --restart always \
