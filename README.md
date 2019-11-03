@@ -88,3 +88,18 @@ docker run \
 	--restart always \
 	warrior-arm32v5:latest
 ```
+
+## Kubernetes
+
+``` shell-interaction
+kubectl create namespace archive
+kubectl apply -n archive -f warrior.yml
+```
+
+If everything works out you should be able to connect to any of your k8s' nodes IP on port 30163 to view.
+
+You can build the image on other platforms (e.g. Raspberry Pi here for example) by using [`docker buildx`](https://github.com/docker/buildx), e.g.:
+
+``` shell-interaction
+docker buildx build -t <yourusername>/archive-team-warrior:latest --platform linux/arm/v7 --push .
+```
