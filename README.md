@@ -23,6 +23,15 @@ docker run --detach \
   archiveteam/warrior-dockerfile
 ```
 
+To easily access the Warrior's web interface of multiple containers, try binding a different port for each subsequent container:
+
+``` shell-interaction
+docker run --detach \
+  --publish 127.0.0.1:8002:8001 \
+  --restart always \
+  archiveteam/warrior-dockerfile
+```
+
 
 ### Configuration
 
