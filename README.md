@@ -19,7 +19,7 @@ If you prefer to just run the process in the background, and automatically start
 ``` shell-interaction
 docker run --detach \
   --publish 127.0.0.1:8001:8001 \
-  --restart always \
+  --restart unless-stopped \
   archiveteam/warrior-dockerfile
 ```
 
@@ -28,7 +28,7 @@ To easily access the Warrior's web interface of multiple containers, try binding
 ``` shell-interaction
 docker run --detach \
   --publish 127.0.0.1:8002:8001 \
-  --restart always \
+  --restart unless-stopped \
   archiveteam/warrior-dockerfile
 ```
 
@@ -56,7 +56,7 @@ will be ignored. Please note: This is currently not available in the Raspberry P
       --env DOWNLOADER="your name" \
       --env SELECTED_PROJECT="auto" \
       --publish 8001:8001 \
-      --restart always \
+      --restart unless-stopped \
       archiveteam/warrior-dockerfile
 ```
 
@@ -94,7 +94,7 @@ docker run \
 	--volume /var/local/warrior/data:/data/data \
 	--volume /var/local/warrior/config.json:/home/warrior/projects/config.json \
 	--publish 8001:8001 \
-	--restart always \
+	--restart unless-stopped \
 	warrior-arm32v5:latest
 ```
 
