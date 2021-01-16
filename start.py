@@ -18,9 +18,9 @@ with open('projects/config.json', 'w') as fp:
 subprocess.run([
     "run-warrior3",
     "--projects-dir",
-    "/app/projects",
+    "/home/warrior/projects",
     "--data-dir",
-    "/app/data",
+    "/home/warrior/data",
     "--warrior-hq",
     "https://warriorhq.archiveteam.org",
     "--port",

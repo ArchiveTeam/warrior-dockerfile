@@ -31,12 +31,16 @@ FROM python:3.9.1-slim-buster
 
 RUN apt update
 RUN apt upgrade -y
-RUN apt install -y git liblua5.1-0 rsync luarocks
+RUN apt install -y git liblua5.1-0 rsync luarocks sudo
+
+RUN useradd -m warrior
+RUN echo "warrior ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+ENV PATH="/home/warrior/.local/bin:${PATH}"
+WORKDIR /home/warrior
+USER warrior
 
 RUN pip3 install requests warcio zstandard
 RUN pip3 install -e git+https://github.com/ArchiveTeam/seesaw-kit.git#egg=seesaw
-
-WORKDIR /app
 
 RUN mkdir data
 RUN mkdir projects
@@ -44,7 +48,7 @@ RUN mkdir projects
 RUN git clone --depth 1 --recurse-submodules https://github.com/ArchiveTeam/warrior-code2.git
 
 COPY --from=build /app/wget-lua/src/wget /usr/local/bin/wget-at
-COPY start.py .
+COPY --chown=warrior:warrior start.py .
 
 EXPOSE 8001
 
