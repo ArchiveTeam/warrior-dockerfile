@@ -1,17 +1,20 @@
 ## A Dockerfile for the [ArchiveTeam Warrior](https://www.archiveteam.org/index.php?title=ArchiveTeam_Warrior)
 <img alt="Warrior logo" src="https://www.archiveteam.org/images/f/f3/Archive_team.png" height="100px"><img alt="Docker logo" src="https://upload.wikimedia.org/wikipedia/commons/7/79/Docker_%28container_engine%29_logo.png" height="100px">
 
+
+###NOTE: This image is outdated and likely will not support newer projects (2020 onwards). Please refer to each project's wiki page to find updated docker images.
+
 Build, run, grab the container IP and access the web interface on port 8001.
 
-Available as a Trusted Build on the index as [`archiveteam/warrior-dockerfile`](https://index.docker.io/u/archiveteam/warrior-dockerfile/) so you can just
+Available as a built image at `atdr.meo.ws/archiveteam/warrior-dockerfile` so you can just 
 
 ```
-docker pull archiveteam/warrior-dockerfile
+docker pull atdr.meo.ws/archiveteam/warrior-dockerfile
 # run without -d to follow the warrior install process
 # you will need to detach or stop-and-start the container.
 # use -p to bind port 8001 on the docker container
 # (default ip 172.17.0.x) to port 8001 on localhost.
-docker run [-d] [-p 127.0.0.1:8001:8001] archiveteam/warrior-dockerfile
+docker run [-d] [-p 127.0.0.1:8001:8001] atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
 
 If you prefer to just run the process in the background, and automatically start it again after machine reboot, use this instead:
@@ -20,7 +23,7 @@ If you prefer to just run the process in the background, and automatically start
 docker run --detach \
   --publish 127.0.0.1:8001:8001 \
   --restart unless-stopped \
-  archiveteam/warrior-dockerfile
+  atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
 
 To easily access the Warrior's web interface of multiple containers, try binding a different port for each subsequent container:
@@ -29,7 +32,7 @@ To easily access the Warrior's web interface of multiple containers, try binding
 docker run --detach \
   --publish 127.0.0.1:8002:8001 \
   --restart unless-stopped \
-  archiveteam/warrior-dockerfile
+  atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
 
 
@@ -57,7 +60,7 @@ will be ignored. Please note: This is currently not available in the Raspberry P
       --env SELECTED_PROJECT="auto" \
       --publish 8001:8001 \
       --restart unless-stopped \
-      archiveteam/warrior-dockerfile
+      atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
 
 ##### Mapping
