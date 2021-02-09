@@ -2,18 +2,23 @@ import json
 import os
 import subprocess
 
-config = {
-    'downloader': os.getenv('DOWNLOADER', ''),
-    'http_username': os.getenv('HTTP_USERNAME', ''),
-    'http_password': os.getenv('HTTP_PASSWORD', ''),
-    'selected_project': os.getenv('SELECTED_PROJECT', ''),
-    'shared:rsync_threads': os.getenv('SHARED_RSYNC_THREADS', ''),
-    'warrior_id': os.getenv('WARRIOR_ID', ''),
-    'concurrent_items': os.getenv('CONCURRENT_ITEMS', ''),
-}
+CONFIG_FILE = 'projects/config.json'
 
-with open('projects/config.json', 'w') as fp:
-    json.dump(config, fp)
+try:
+    with open(CONFIG_FILE, 'r') as fp:
+        json.load(fp)
+except Exception:
+    config = {
+        'downloader': os.getenv('DOWNLOADER', ''),
+        'http_username': os.getenv('HTTP_USERNAME', ''),
+        'http_password': os.getenv('HTTP_PASSWORD', ''),
+        'selected_project': os.getenv('SELECTED_PROJECT', ''),
+        'shared:rsync_threads': os.getenv('SHARED_RSYNC_THREADS', ''),
+        'warrior_id': os.getenv('WARRIOR_ID', ''),
+        'concurrent_items': os.getenv('CONCURRENT_ITEMS', ''),
+    }
+    with open(CONFIG_FILE, 'w') as fp:
+        json.dump(config, fp)
 
 subprocess.run([
     "run-warrior3",
