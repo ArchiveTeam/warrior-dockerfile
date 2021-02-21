@@ -16,3 +16,5 @@ EXPOSE 8001
 STOPSIGNAL SIGINT
 
 ENTRYPOINT [ "python", "start.py" ]
+
+# drone build test
