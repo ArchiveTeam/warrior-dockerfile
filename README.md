@@ -45,8 +45,8 @@ You can stop and resume the Warrior with `docker stop` and `docker start`
 
 #### Using Environment Variables
 
-If you don't mount a `projects.json` configuration, you can provide seed settings using
-environment variables. Once a `projects.json` file exists, environment variables
+If you don't mount a `projects/config.json` configuration, you can provide seed settings using
+environment variables. Once a `projects/config.json` file exists, environment variables
 will be ignored. Please note: This is currently not available in the Raspberry PI image.
 
 ##### Example:
