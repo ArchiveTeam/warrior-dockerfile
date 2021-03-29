@@ -31,7 +31,7 @@ spec:
         app: warrior
     spec:
       containers:
-      - image: archiveteam/warrior-dockerfile:latest
+      - image: atdr.meo.ws/archiveteam/warrior-dockerfile:latest
         name: warrior
         resources: {}
         env:
