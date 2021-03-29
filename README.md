@@ -101,6 +101,8 @@ docker run \
 
 ## Kubernetes
 
+Edit the environment variable `DOWNLOADER` inside `warrior.yml` and set it to your name. This name will be used on the leaderboards.
+
 ``` shell-interaction
 kubectl create namespace archive
 kubectl apply -n archive -f warrior.yml
