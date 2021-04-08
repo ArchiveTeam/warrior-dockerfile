@@ -30,27 +30,14 @@ spec:
       labels:
         app: warrior
     spec:
-      volumes:
-      - name: warrior-data
-        emptyDir: {}
       containers:
-      - image: docker.io/kjoconnor/archive-team-warrior:latest
+      - image: atdr.meo.ws/archiveteam/warrior-dockerfile:latest
         name: warrior
+        resources: {}
+        env:
+        - name: DOWNLOADER
+          value: kubernetes
+        - name: SELECTED_PROJECT
+          value: auto
         ports:
         - containerPort: 8001
-        volumeMounts:
-        - name: warrior-data
-          mountPath: /home/warrior
-      initContainers:
-        - name: create-dirs
-          image: busybox
-          command: [ "mkdir", "/home/warrior/projects", "/home/warrior/assets" ]
-          volumeMounts:
-          - name: warrior-data
-            mountPath: /home/warrior
-        - name: chmod
-          image: busybox
-          command: [ "chmod", "-R", "777", "/home/warrior" ]
-          volumeMounts:
-          - name: warrior-data
-            mountPath: /home/warrior
