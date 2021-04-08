@@ -12,7 +12,7 @@ docker run --detach \
   --restart=on-failure \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   containrrr/watchtower --label-enable --cleanup --interval 3600 && \
-  docker run --detach \
+docker run --detach \
   --name archiveteam-warrior \
   --label=com.centurylinklabs.watchtower.enable=true \
   --restart=on-failure \
