@@ -20,6 +20,22 @@ docker run --detach \
   atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
 
+On Windows (CMD), replace `\` with `^` like so:
+``` shell-interaction
+docker run --detach ^
+  --name watchtower ^
+  --restart=on-failure ^
+  --volume /var/run/docker.sock:/var/run/docker.sock ^
+  containrrr/watchtower --label-enable --cleanup --interval 3600 && ^
+docker run --detach ^
+  --name archiveteam-warrior ^
+  --label=com.centurylinklabs.watchtower.enable=true ^
+  --restart=on-failure ^
+  --publish 8001:8001 ^
+  atdr.meo.ws/archiveteam/warrior-dockerfile
+```
+On Windows (PowerShell), replace `\` with `` ` ``.
+
 To easily access the Warrior's web interface of multiple containers, try binding a different port for each subsequent container by incrementing `--publish` in your `docker run` command for the Warrior like so:
 
 ``` shell-interaction
