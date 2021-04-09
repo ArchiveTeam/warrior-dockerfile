@@ -1,35 +1,51 @@
-## A Dockerfile for the [ArchiveTeam Warrior](https://www.archiveteam.org/index.php?title=ArchiveTeam_Warrior)
+## A Dockerfile for the [Archive Team Warrior](https://www.archiveteam.org/index.php?title=ArchiveTeam_Warrior)
 <img alt="Warrior logo" src="https://www.archiveteam.org/images/f/f3/Archive_team.png" height="100px"><img alt="Docker logo" src="https://upload.wikimedia.org/wikipedia/commons/7/79/Docker_%28container_engine%29_logo.png" height="100px">
 
 
 Build, run, grab the container IP and access the web interface on port 8001.
 
-Available as a built image at `atdr.meo.ws/archiveteam/warrior-dockerfile` so you can just 
-
-```
-docker pull atdr.meo.ws/archiveteam/warrior-dockerfile
-# run without -d to follow the warrior install process
-# you will need to detach or stop-and-start the container.
-# use -p to bind port 8001 on the docker container
-# (default ip 172.17.0.x) to port 8001 on localhost.
-docker run [-d] [-p 127.0.0.1:8001:8001] atdr.meo.ws/archiveteam/warrior-dockerfile
-```
-
-If you prefer to just run the process in the background, and automatically start it again after machine reboot, use this instead:
+Available as a built image at `atdr.meo.ws/archiveteam/warrior-dockerfile`. To run the Warrior in the background, automatically start it again after machine reboot, and automatically update dependencies updates (via Watchtower), simply just
 
 ``` shell-interaction
 docker run --detach \
-  --publish 127.0.0.1:8001:8001 \
-  --restart unless-stopped \
+  --name watchtower \
+  --restart=on-failure \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  containrrr/watchtower --label-enable --cleanup --interval 3600 && \
+docker run --detach \
+  --name archiveteam-warrior \
+  --label=com.centurylinklabs.watchtower.enable=true \
+  --restart=on-failure \
+  --publish 8001:8001 \
   atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
 
-To easily access the Warrior's web interface of multiple containers, try binding a different port for each subsequent container:
+On Windows (CMD), replace `\` with `^` like so:
+``` shell-interaction
+docker run --detach ^
+  --name watchtower ^
+  --restart=on-failure ^
+  --volume /var/run/docker.sock:/var/run/docker.sock ^
+  containrrr/watchtower --label-enable --cleanup --interval 3600 && ^
+docker run --detach ^
+  --name archiveteam-warrior ^
+  --label=com.centurylinklabs.watchtower.enable=true ^
+  --restart=on-failure ^
+  --publish 8001:8001 ^
+  atdr.meo.ws/archiveteam/warrior-dockerfile
+```
+On Windows (PowerShell), replace `\` with `` ` ``.
+
+To easily access the Warrior's web interface of multiple containers, try binding a different port for each subsequent container by incrementing `--publish` in your `docker run` command for the Warrior like so:
 
 ``` shell-interaction
 docker run --detach \
-  --publish 127.0.0.1:8002:8001 \
-  --restart unless-stopped \
+  --env DOWNLOADER="your name" \
+  --env SELECTED_PROJECT="auto" \
+  --name archiveteam-warrior \
+  --label=com.centurylinklabs.watchtower.enable=true \
+  --restart=on-failure \
+  --publish 8002:8001 \
   atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
 
@@ -51,14 +67,16 @@ will be ignored. Please note: This is currently not available in the Raspberry P
 
 ##### Example:
 
-```shell
-  docker run \
-      --detach \
-      --env DOWNLOADER="your name" \
-      --env SELECTED_PROJECT="auto" \
-      --publish 8001:8001 \
-      --restart unless-stopped \
-      atdr.meo.ws/archiveteam/warrior-dockerfile
+To specify environment variables, modify your `docker run` command for the Warrior like so:
+``` shell-interaction
+docker run --detach \
+  --env DOWNLOADER="your name" \
+  --env SELECTED_PROJECT="auto" \
+  --name archiveteam-warrior \
+  --label=com.centurylinklabs.watchtower.enable=true \
+  --restart=on-failure \
+  --publish 8001:8001 \
+  atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
 
 ##### Mapping
