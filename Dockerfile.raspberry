@@ -1,5 +1,5 @@
 # Dockerfile for Raspberry Pi 2 and 3
-FROM arm32v5/debian:sid-slim
+FROM arm32v5/debian:stable-slim
 LABEL version="1.0.0" \
 	description="ArchiveTeam Warrior container for Raspberry Pi arm32"
 
