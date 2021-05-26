@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
 
   archiveTeamWarrior:
-    image: archiveteam/warrior-dockerfile
+    image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior
     hostname: archiveTeamWarrior
     ports:
