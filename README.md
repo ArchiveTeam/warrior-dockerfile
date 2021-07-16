@@ -134,3 +134,4 @@ You can build the image on other platforms (e.g. Raspberry Pi here for example) 
 docker buildx build -t <yourusername>/archive-team-warrior:latest --platform linux/arm/v7 --push .
 ```
 
+
