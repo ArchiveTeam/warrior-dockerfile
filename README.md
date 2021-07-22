@@ -9,13 +9,13 @@ Available as a built image at `atdr.meo.ws/archiveteam/warrior-dockerfile`. To r
 ``` shell-interaction
 docker run --detach \
   --name watchtower \
-  --restart=on-failure \
+  --restart=unless-stopped \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   containrrr/watchtower --label-enable --cleanup --interval 3600 && \
 docker run --detach \
   --name archiveteam-warrior \
   --label=com.centurylinklabs.watchtower.enable=true \
-  --restart=on-failure \
+  --restart=unless-stopped \
   --publish 8001:8001 \
   atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
@@ -24,13 +24,13 @@ On Windows (CMD), replace `\` with `^` like so:
 ``` shell-interaction
 docker run --detach ^
   --name watchtower ^
-  --restart=on-failure ^
+  --restart=unless-stopped ^
   --volume /var/run/docker.sock:/var/run/docker.sock ^
   containrrr/watchtower --label-enable --cleanup --interval 3600 && ^
 docker run --detach ^
   --name archiveteam-warrior ^
   --label=com.centurylinklabs.watchtower.enable=true ^
-  --restart=on-failure ^
+  --restart=unless-stopped ^
   --publish 8001:8001 ^
   atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
@@ -44,7 +44,7 @@ docker run --detach \
   --env SELECTED_PROJECT="auto" \
   --name archiveteam-warrior \
   --label=com.centurylinklabs.watchtower.enable=true \
-  --restart=on-failure \
+  --restart=unless-stopped \
   --publish 8002:8001 \
   atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
@@ -74,7 +74,7 @@ docker run --detach \
   --env SELECTED_PROJECT="auto" \
   --name archiveteam-warrior \
   --label=com.centurylinklabs.watchtower.enable=true \
-  --restart=on-failure \
+  --restart=unless-stopped \
   --publish 8001:8001 \
   atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
