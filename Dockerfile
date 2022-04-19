@@ -16,4 +16,4 @@ EXPOSE 8001
 STOPSIGNAL SIGINT
 
 ENTRYPOINT [ "python", "start.py" ]
-HEALTHCHECK --interval=5s --timeout=3s CMD /home/warrior/data/wget-at -nv -t1 'http://localhost:8001/index.html' --delete-after || exit 1
+HEALTHCHECK --interval=5s --timeout=3s CMD /home/warrior/data/wget-at -nv -t1 'http://localhost:8001/index.html' -O - 1> /dev/null || exit 1
