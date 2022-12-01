@@ -1,3 +1,5 @@
+# OUTDATED
+
 # Dockerfile for k8s on Raspberry Pis
 FROM arm32v5/debian:sid-slim
 LABEL version="1.0.0" \
