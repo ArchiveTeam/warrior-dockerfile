@@ -2,7 +2,7 @@ version: "3"
 
 services:
   Watchtower:
-    image: v2tec/watchtower:latest
+    image: containrrr/watchtower:latest
     command: --cleanup --label-enable --schedule="0 2 * * *"
     container_name: Watchtower
     volumes:
