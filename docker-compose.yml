@@ -3,7 +3,7 @@ version: "3"
 services:
   Watchtower:
     image: containrrr/watchtower:latest
-    command: --cleanup --label-enable --schedule="0 2 * * *"
+    command: --cleanup --label-enable --interval 3600
     container_name: Watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
