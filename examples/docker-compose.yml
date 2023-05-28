@@ -1,7 +1,6 @@
 version: "3"
-
 services:
-  Watchtower:
+  watchtower:
     image: containrrr/watchtower:latest
     command: --cleanup --label-enable --interval 3600
     container_name: Watchtower
@@ -20,4 +19,3 @@ services:
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
-
