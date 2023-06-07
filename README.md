@@ -1,8 +1,8 @@
 # Archive Team Warrior Dockerfile
 
-<img alt="Warrior logo" src="https://wiki.archiveteam.org/images/f/f3/Archive_team.png" height="100px"><img alt="Docker logo" src="https://upload.wikimedia.org/wikipedia/commons/7/79/Docker_%28container_engine%29_logo.png" height="100px">
+<img alt="Warrior logo" src="https://wiki.archiveteam.org/images/f/f3/Archive_team.png" height="100px"><img alt="Docker logo" src="https://wiki.archiveteam.org/images/7/79/Docker_%28container_engine%29_logo.png" height="100px">
 
-A Dockerfile for the [Archive Team Warrior](https://www.archiveteam.org/index.php?title=ArchiveTeam_Warrior)
+A Dockerfile for the [Archive Team Warrior](https://wiki.archiveteam.org/index.php?title=ArchiveTeam_Warrior)
 
 Build, run, grab the container IP and access the web interface on port 8001.
 
@@ -78,7 +78,7 @@ You can stop and resume the Warrior with `docker stop` and `docker start`
 
 If you don't mount a `projects/config.json` configuration, you can provide seed settings using
 environment variables. Once a `projects/config.json` file exists, environment variables
-will be ignored. Please note: This is currently not available in the Raspberry PI image.
+will be ignored.
 
 For example, to specify environment variables, modify your `docker run` command for the Warrior like so:
 
@@ -105,52 +105,20 @@ docker run --detach \
 | WARRIOR_ID           | warrior_id           |                   |         |
 | CONCURRENT_ITEMS     | concurrent_items     |                   | `3`     |
 
-## Alternative Platforms
-
-### Raspberry Pi
-
-You can build the container with the following command:
-
-```bash
-docker build --rm -t warrior-arm32v5:latest -f Dockerfile.raspberry .
-```
-
-The image needs a place to store the downloaded data as well as its
-configuration.  Say you have a location suitable at /var/local/warrior
-use the command below, otherwise update the data and config.json paths.
-
-First, create an empty config.json if it doesn't exist.  Otherwise when you
-mount the path with docker it will create it as a directory.
-
-```bash
-touch /var/local/warrior/config.json
-```
-
-Now start the container.
-
-```bash
-docker run \
-  --volume /var/local/warrior/data:/data/data \
-  --volume /var/local/warrior/config.json:/home/warrior/projects/config.json \
-  --publish 8001:8001 \
-  --restart unless-stopped \
-  warrior-arm32v5:latest
-```
-
 ## Other Ways to Run
 
 ### Kubernetes
 
-Edit the environment variable `DOWNLOADER` inside `examples/k8s-warrior.yml` and set it to your name. This name will be used on the leaderboards.
+Edit the environment variable `DOWNLOADER` inside `k8s-warrior.yml` and set it to your name. This name will be used on the leaderboards.
 
 ```bash
 kubectl create namespace archive
-kubectl apply -n archive -f examples/k8s-warrior.yml
+kubectl apply -n archive -f k8s-warrior.yml
 ```
 
 If everything works out you should be able to connect to any of your k8s' nodes IP on port 30163 to view.
 
-You can build the image on other platforms (e.g. Raspberry Pi here for example) by using [`docker buildx`](https://github.com/docker/buildx), e.g.:
+You can build the image on other platforms by using [`docker buildx`](https://github.com/docker/buildx), e.g.:
 
 ```bash
 docker buildx build -t <yourusername>/archive-team-warrior:latest --platform linux/arm/v7 --push .
@@ -158,7 +126,7 @@ docker buildx build -t <yourusername>/archive-team-warrior:latest --platform lin
 
 ### Docker Compose
 
-First edit the `examples/docker-compose.yml` file with any configuration keys (as described above). When configured to your liking, use `docker compose` to start both Warrior and Watchtower.
+First edit the `docker-compose.yml` file with any configuration keys (as described above). When configured to your liking, use `docker compose` to start both Warrior and Watchtower.
 
 ```bash
 cd examples
