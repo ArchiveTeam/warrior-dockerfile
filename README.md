@@ -1,7 +1,6 @@
-# Warrior
+# Archive Team Warrior Dockerfile
 
-<img alt="Warrior logo" src="https://wiki.archiveteam.org/images/f/f3/Archive_team.png" height="100px">
-<img alt="Docker logo" src="https://upload.wikimedia.org/wikipedia/commons/7/79/Docker_%28container_engine%29_logo.png" height="100px">
+<img alt="Warrior logo" src="https://wiki.archiveteam.org/images/f/f3/Archive_team.png" height="100px"><img alt="Docker logo" src="https://upload.wikimedia.org/wikipedia/commons/7/79/Docker_%28container_engine%29_logo.png" height="100px">
 
 A Dockerfile for the [Archive Team Warrior](https://www.archiveteam.org/index.php?title=ArchiveTeam_Warrior)
 
