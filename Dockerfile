@@ -6,11 +6,11 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends nodejs \
  && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m warrior \
+RUN useradd -m warrior --uid 1000 \
  && echo "warrior ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 ENV PATH="/home/warrior/.local/bin:${PATH}"
 WORKDIR /home/warrior
-USER warrior
+USER 1000
 
 RUN mkdir data projects \
  && ln -fs /usr/local/bin/wget-lua /home/warrior/data/wget-at
