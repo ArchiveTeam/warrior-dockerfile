@@ -8,6 +8,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      com.centurylinklabs.watchtower.scope: "archive-team-warrior"
     restart: unless-stopped
 
   archiveTeamWarrior:
@@ -18,4 +19,5 @@ services:
       - "8001:8001"
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      com.centurylinklabs.watchtower.scope: "archive-team-warrior"
     restart: always
