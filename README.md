@@ -135,7 +135,7 @@ docker compose up -d
 
 ### Podman Compose
 
-Podman Compose works almost identically to Docker's version but watchtowerr is not the recommended auto-update method.  To achive a similar effect:
+Podman Compose works almost identically to Docker's version but watchtower is not the recommended auto-update method.  To achive a similar effect:
 #### One Time Setup
 1. (as root) Set up the base systemd unit file for containers:
 `sudo /usr/local/bin/podman-compose systemd --action create-unit`
