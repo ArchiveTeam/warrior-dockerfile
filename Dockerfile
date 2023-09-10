@@ -1,9 +1,15 @@
 FROM atdr.meo.ws/archiveteam/grab-base
 
-LABEL version="20230727.01"
+LABEL version="20230910.01"
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends nodejs \
+ && rm -rf /var/lib/apt/lists/*
+
+# temporary hack
+RUN rm /usr/bin/sudo \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends sudo \
  && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m warrior --uid 1000 \
