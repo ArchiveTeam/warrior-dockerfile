@@ -1,6 +1,6 @@
 FROM atdr.meo.ws/archiveteam/grab-base
 
-LABEL version="20230910.01"
+LABEL version="20230914.01"
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends nodejs \
@@ -20,7 +20,7 @@ USER 1000
 
 RUN mkdir data projects \
  && ln -fs /usr/local/bin/wget-lua /home/warrior/data/wget-at
-COPY --from=atdr.meo.ws/archiveteam/wget-lua:v1.21.3-at-gnutls /wget /home/warrior/data/wget-at-gnutls
+COPY --from=atdr.meo.ws/archiveteam/grab-base:gnutls /usr/local/bin/wget-lua /home/warrior/data/wget-at-gnutls
 
 RUN git clone --depth 1 --recurse-submodules https://github.com/ArchiveTeam/warrior-code2.git
 
