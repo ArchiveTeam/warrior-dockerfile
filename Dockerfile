@@ -1,6 +1,6 @@
 FROM atdr.meo.ws/archiveteam/grab-base
 
-LABEL version="20231213.01"
+LABEL version="20240513.01"
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends nodejs \
