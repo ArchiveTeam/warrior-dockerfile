@@ -9,6 +9,8 @@ services:
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
+    environment:
+      - DOCKER_API_VERSION=1.52
 
   archiveTeamWarrior:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
