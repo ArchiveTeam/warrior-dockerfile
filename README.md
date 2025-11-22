@@ -20,6 +20,7 @@ docker run --detach \
   --name watchtower \
   --restart=on-failure \
   --volume /var/run/docker.sock:/var/run/docker.sock \
+  -e DOCKER_API_VERSION=1.52 \
   containrrr/watchtower --label-enable --cleanup --interval 3600
 
 docker run --detach \
@@ -37,6 +38,7 @@ docker run --detach ^
   --name watchtower ^
   --restart=on-failure ^
   --volume /var/run/docker.sock:/var/run/docker.sock ^
+  -e DOCKER_API_VERSION=1.52 ^
   containrrr/watchtower --label-enable --cleanup --interval 3600
 
 docker run --detach ^
