@@ -1,6 +1,6 @@
 FROM atdr.meo.ws/archiveteam/grab-base
 
-LABEL version="20260211.01"
+LABEL version="20260313.01"
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends tini bash \
