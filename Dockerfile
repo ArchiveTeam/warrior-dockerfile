@@ -1,10 +1,13 @@
 FROM atdr.meo.ws/archiveteam/grab-base
 
-LABEL version="20260313.01"
+LABEL version="20260319.01"
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends tini bash \
  && rm -rf /var/lib/apt/lists/*
+
+COPY --from=atdr.meo.ws/archiveteam/grab-base:nss /usr/local/lib /usr/local/lib
+RUN ldconfig
 
 RUN useradd -m warrior --uid 1000 \
  && echo "warrior ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
@@ -16,7 +19,9 @@ USER 1000
 
 RUN mkdir data projects \
  && ln -fs /usr/local/bin/wget-lua /home/warrior/data/wget-at
+COPY --from=atdr.meo.ws/archiveteam/grab-base:openssl /usr/local/bin/wget-lua /home/warrior/data/wget-at-openssl
 COPY --from=atdr.meo.ws/archiveteam/grab-base:gnutls /usr/local/bin/wget-lua /home/warrior/data/wget-at-gnutls
+COPY --from=atdr.meo.ws/archiveteam/grab-base:nss /usr/local/bin/wget-lua /home/warrior/data/wget-at-nss
 
 RUN git clone --depth 1 --recurse-submodules https://github.com/ArchiveTeam/warrior-code2.git
 
