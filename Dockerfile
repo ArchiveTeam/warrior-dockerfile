@@ -1,12 +1,14 @@
 FROM atdr.meo.ws/archiveteam/grab-base
 
-LABEL version="20260319.01"
+LABEL version="20260323.01"
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends tini bash \
  && rm -rf /var/lib/apt/lists/*
 
 COPY --from=atdr.meo.ws/archiveteam/grab-base:nss /usr/local/lib /usr/local/lib
+COPY --from=atdr.meo.ws/archiveteam/grab-base:nss /etc/ssl/certs /etc/ssl/certs
+COPY --from=atdr.meo.ws/archiveteam/grab-base:nss /usr/local/etc/wgetrc /usr/local/etc/wgetrc
 RUN ldconfig
 
 RUN useradd -m warrior --uid 1000 \
