@@ -132,3 +132,45 @@ First edit the `docker-compose.yml` file with any configuration keys (as describ
 cd examples
 docker compose up -d
 ```
+
+### Podman Compose
+
+Podman Compose works almost identically to Docker's version but watchtower is not the recommended auto-update method.  To achive a similar effect:
+#### One Time Setup
+1. (as root) Set up the base systemd unit file for containers:
+`sudo /usr/local/bin/podman-compose systemd --action create-unit`
+1. (as your user) Configure the auto-update timer:
+`systemctl --user enable --now podman-auto-update.timer`
+1. (as your user) Create your directory to hold compose files:
+`mkdir -p ~/containers`
+
+#### For each container:
+1. Set up a directory to hold the container and other files:  
+`mkdir -p ~/containers/archiveteam; cd ~/containers/archiveteam`
+2. Create `container-compose.yml` in the new directory:  
+```
+version: "3"
+services:
+  archiveteam:
+    image: atdr.meo.ws/archiveteam/warrior-dockerfile
+    container_name: archiveteam
+    ports:
+      - "8001:8001"
+    restart: unless-stopped
+    env_file: .env
+    labels:
+      - "io.containers.autoupdate=registry"
+```
+3. Create the `.env` file in the same directory with your configuration, using the Configuration Mapping fields above:
+```
+DOWNLOADER=
+HTTP_USERNAME=
+HTTP_PASSWORD=
+SELECTED_PROJECT=auto
+CONCURRENT_ITEMS=
+```
+4. Test the config with `podman-compose up`
+5. If everything goes well, Ctrl-C the process and run `podman-compose down` to clean up
+6. Register the container with systemctl: `podman-compose systemd -a register`
+7. Enable the container to start on boot and start it right now with `systemctl --user enable --now podman-compose@archiveteam`
+ 
