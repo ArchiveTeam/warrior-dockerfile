@@ -20,7 +20,7 @@ docker run --detach \
   --name watchtower \
   --restart=on-failure \
   --volume /var/run/docker.sock:/var/run/docker.sock \
-  containrrr/watchtower --label-enable --cleanup --interval 3600
+  nickfedor/watchtower --label-enable --cleanup --interval 3600
 
 docker run --detach \
   --name archiveteam-warrior \
@@ -37,7 +37,7 @@ docker run --detach ^
   --name watchtower ^
   --restart=on-failure ^
   --volume /var/run/docker.sock:/var/run/docker.sock ^
-  containrrr/watchtower --label-enable --cleanup --interval 3600
+  nickfedor/watchtower --label-enable --cleanup --interval 3600
 
 docker run --detach ^
   --name archiveteam-warrior ^
