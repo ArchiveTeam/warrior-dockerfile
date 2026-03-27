@@ -104,6 +104,7 @@ docker run --detach \
 | SHARED_RSYNC_THREADS | shared:rsync_threads |                   | `20`    |
 | WARRIOR_ID           | warrior_id           |                   |         |
 | CONCURRENT_ITEMS     | concurrent_items     |                   | `3`     |
+| WARRIOR_RUN_DIR      |                      |                   | `/home/warrior` |
 
 ## Other Ways to Run
 
@@ -131,4 +132,16 @@ First edit the `docker-compose.yml` file with any configuration keys (as describ
 ```bash
 cd examples
 docker compose up -d
+```
+
+#### Run using tmpfs
+
+The Warrior uses disk as scratch space. You may want to use a `tmpfs` mount to [prevent unnecessary wear and tear](https://github.com/ArchiveTeam/warrior-dockerfile/issues/83) if you have RAM to spare. Docker Compose example:
+
+```
+  warrior:
+    environment:
+      WARRIOR_RUN_DIR: /warrior-tmp
+    tmpfs:
+      - /warrior-tmp:exec,mode=777,uid=1000,gid=1000
 ```
