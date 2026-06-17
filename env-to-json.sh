@@ -14,6 +14,8 @@ else
     "selected_project": env.SELECTED_PROJECT,
     "shared:rsync_threads": env.SHARED_RSYNC_THREADS,
     "warrior_id": env.WARRIOR_ID,
-    "concurrent_items": env.CONCURRENT_ITEMS
+    "concurrent_items": env.CONCURRENT_ITEMS,
+    "download_bwlimit": (env.DOWNLOAD_BWLIMIT // ""),
+    "upload_bwlimit": (env.UPLOAD_BWLIMIT // "")
   }' > /home/warrior/projects/config.json
 fi
