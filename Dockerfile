@@ -1,6 +1,6 @@
 FROM atdr.meo.ws/archiveteam/grab-base
 
-LABEL version="20260910.01"
+LABEL version="20260917.01"
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends bash \
