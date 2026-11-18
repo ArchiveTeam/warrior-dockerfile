@@ -4,6 +4,8 @@
 
 A Dockerfile for the [Archive Team Warrior](https://wiki.archiveteam.org/index.php?title=ArchiveTeam_Warrior)
 
+The official image supports both **amd64** and **arm64** architectures (including Raspberry Pi 4/5 and Apple Silicon). Docker will automatically pull the correct image for your platform. ARM32 (armv7/armhf) is not supported.
+
 Build, run, grab the container IP and access the web interface on port 8001.
 
 ## Getting Started
@@ -118,17 +120,10 @@ kubectl apply -n archive -f k8s-warrior.yml
 
 If everything works out you should be able to connect to any of your k8s' nodes IP on port 30163 to view.
 
-You can build the image on other platforms by using [`docker buildx`](https://github.com/docker/buildx), e.g.:
-
-```bash
-docker buildx build -t <yourusername>/archive-team-warrior:latest --platform linux/arm/v7 --push .
-```
-
 ### Docker Compose
 
 First edit the `docker-compose.yml` file with any configuration keys (as described above). When configured to your liking, use `docker compose` to start both Warrior and Watchtower.
 
 ```bash
-cd examples
 docker compose up -d
 ```
