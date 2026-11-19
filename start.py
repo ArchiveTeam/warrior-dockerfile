@@ -1,8 +1,18 @@
 import json
 import os
 import subprocess
+import shutil
 
-CONFIG_FILE = 'projects/config.json'
+DEFAULT_RUN_DIR = '/home/warrior'
+WARRIOR_RUN_DIR = os.getenv('WARRIOR_RUN_DIR', DEFAULT_RUN_DIR)
+CONFIG_FILE = os.path.join(WARRIOR_RUN_DIR, 'projects/config.json')
+
+# copy data/projects from image to the custom run dir
+if WARRIOR_RUN_DIR != DEFAULT_RUN_DIR:
+    for dir_name in ['data', 'projects']:
+        dst = os.path.join(WARRIOR_RUN_DIR, dir_name)
+        src = os.path.join(DEFAULT_RUN_DIR, dir_name)
+        shutil.copytree(src, dst)
 
 try:
     with open(CONFIG_FILE, 'r') as fp:
@@ -24,9 +34,9 @@ subprocess.run(
     [
         "run-warrior3",
         "--projects-dir",
-        "/home/warrior/projects",
+        os.path.join(WARRIOR_RUN_DIR, "projects"),
         "--data-dir",
-        "/home/warrior/data",
+        os.path.join(WARRIOR_RUN_DIR, "data"),
         "--warrior-hq",
         "https://warriorhq.archiveteam.org",
         "--port",
