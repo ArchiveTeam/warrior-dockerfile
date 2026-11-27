@@ -93,6 +93,12 @@ docker run --detach \
   atdr.meo.ws/archiveteam/warrior-dockerfile
 ```
 
+`DOWNLOAD_BWLIMIT` and `UPLOAD_BWLIMIT` set a global bandwidth cap in **KiB/s**
+(`0` = unlimited). The cap is an aggregate ceiling shared across all concurrent
+items — the warrior divides it across the active download/upload processes — so
+it under-shoots when fewer items are transferring. For exact, link-level
+shaping, prefer host-level `tc`/docker-tc or VM bandwidth controls.
+
 ### Configuration Mapping
 
 | ENV                  | JSON key             | Example           | Default |
@@ -104,6 +110,8 @@ docker run --detach \
 | SHARED_RSYNC_THREADS | shared:rsync_threads |                   | `20`    |
 | WARRIOR_ID           | warrior_id           |                   |         |
 | CONCURRENT_ITEMS     | concurrent_items     |                   | `3`     |
+| DOWNLOAD_BWLIMIT     | download_bwlimit     | `5000`            | `0`     |
+| UPLOAD_BWLIMIT       | upload_bwlimit       | `2000`            | `0`     |
 
 ## Other Ways to Run
 

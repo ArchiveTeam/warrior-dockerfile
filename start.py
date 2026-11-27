@@ -16,6 +16,8 @@ except Exception:
         'shared:rsync_threads': os.getenv('SHARED_RSYNC_THREADS', ''),
         'warrior_id': os.getenv('WARRIOR_ID', ''),
         'concurrent_items': os.getenv('CONCURRENT_ITEMS', ''),
+        'download_bwlimit': os.getenv('DOWNLOAD_BWLIMIT', ''),
+        'upload_bwlimit': os.getenv('UPLOAD_BWLIMIT', ''),
     }
     with open(CONFIG_FILE, 'w') as fp:
         json.dump(config, fp)
